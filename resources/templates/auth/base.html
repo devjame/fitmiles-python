@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ config('application.name') }}</title>
+
+    <link href="/static/css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="antialiased text-gray-900">
+    <nav class="navbar mb-2 shadow bg-primary text-primary-content">
+        <div class="flex-1 px-2 mx-2">
+            <a class="text-lg font-bold uppercase border-b-2 transition duration-500 border-transparent hover:border-blue-800"
+                href="/home">{{
+                config('application.name') }}</a>
+        </div>
+        <div class="flex-none">
+            <ul class="flex items-stretch">
+                {% if auth() %}
+                <li>
+                    <a class="btn btn-ghost btn-sm rounded-btn " href="{{ route('instructor.home') }}">Dashboard</a>
+                </li>
+                <li>
+                    <a class="btn btn-ghost btn-sm rounded-btn " href="/logout">Logout</a>
+                </li>
+                {% else %}
+                <li>
+                    <a class="btn btn-ghost btn-sm rounded-btn " href="/login">Login</a>
+                </li>
+                <li>
+                    <a class="btn btn-ghost btn-sm rounded-btn " href="/register">Register</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <div class="w-full max-w-sm mx-auto p-3 overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+
+</html>

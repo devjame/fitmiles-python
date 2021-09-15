@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% import 'components/user_list.html' as list %}
+
+
+{% block css %}
+<!-- Application CSS -->
+<script src="/static/js/statistics.js" defer></script>
+{% endblock %}
+
+{% block title %}
+Instructor Home Page
+{% endblock %}
+
+{% block content %}
+<div class="flex w-full" x-data="{ open: false }">
+    <div class="max-w-md">
+        <div class="px-4 py-5 sm:px-6 w-full border dark:bg-gray-800 bg-white shadow mb-2 rounded-md relative">
+            <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">
+                Instructors Lists
+            </h3>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-200">
+                Details and informations about Instructors.
+            </p>
+            <a href="{{ route('instructor.create') }}" class="btn btn-info btn-xs absolute top-2 right-1"
+                data-turbo-frame="create_instructor">New</a>
+        </div>
+        <ul class=" flex flex-col overflow-y-auto">
+            {% for instructor in instructors %}
+            <li class="border-gray-400 flex flex-row mb-2">
+                {{ list.user_list(instructor) }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <turbo-frame id="create_instructor" class="flex-1">
+        <div class="flex-1">
+            <div class="bg-white dark:bg-gray-800 ">
+                <div class="text-center w-full mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20">
+                    <h2 class="text-3xl font-extrabold text-black dark:text-white sm:text-4xl">
+                        <span class="block">
+                            Create New Instructors In Your GYM
+                        </span>
+                        <span class="block text-indigo-500">
+                            Grow little, but efficiently
+                        </span>
+                    </h2>
+                    <div class="lg:mt-0 lg:flex-shrink-0">
+                        <div class="mt-12 inline-flex rounded-md shadow">
+                            <a href="{{ route('instructor.create') }}" class="btn btn-info">Add Instructor</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </turbo-frame>
+</div>
+{% endblock %}

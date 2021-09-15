@@ -1,0 +1,49 @@
+{% extends 'auth/base.html' %}
+{% from 'components/alerts.html' import alert_error %}
+
+{% block content %}
+<div class="px-6 py-4">
+    <h3 class="mt-1 text-xl font-medium text-center text-gray-600 dark:text-gray-200">Welcome Back</h3>
+
+    <p class="mt-1 text-center text-gray-500 dark:text-gray-400">Login or create account</p>
+    {% if bag().any() %}
+    {% for error in bag().get_errors() %}
+    <div class="flex w-full dark:bg-gray-800 mb-1 rounded-lg shadow-sm">
+        {{ alert_error(error) }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <form action="{{ route('login') }}" method="POST">
+        {{ csrf_field }}
+        {{ back() }}
+        <div class="form-control mt-4">
+            <label for="email" class="label"><span class="label-text">Email</span></label>
+            <input type="text"
+                class="input input-bordered dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:border-blue-500"
+                name="email" value="{{ old('email') }}" placeholder="Email Address" aria-label="Email Address">
+        </div>
+        <div class="form-control mt-4">
+            <label for="password" class="label"><span class="label-text">Password</span></label>
+            <input type="password"
+                class="input input-bordered dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:border-blue-500"
+                name="password" value="{{ old('password') }}" placeholder="Password" aria-label="Password">
+        </div>
+
+        <div class="flex items-center justify-between mt-4">
+            <a href="{{ route('forgot.password') }}"
+                class="text-sm text-gray-600 dark:text-gray-200 hover:text-gray-500">Forget Password?</a>
+
+            <button class="btn btn-primary" type="submit">
+                Login
+            </button>
+        </div>
+    </form>
+</div>
+
+<div class="flex items-center justify-center py-4 text-center bg-gray-100 dark:bg-gray-700">
+    <span class="text-sm text-gray-600 dark:text-gray-200">Don't have an account? </span>
+
+    <a href="{{ route('register') }}"
+        class="mx-2 text-sm font-bold text-blue-600 dark:text-blue-400 hover:text-blue-500">Register</a>
+</div>
+{% endblock %}

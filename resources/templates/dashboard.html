@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+
+
+{% block css %}
+<!-- Application CSS -->
+<script src="/static/js/statistics.js" defer></script>
+{% endblock %}
+
+{% block title %}
+Welcome To {{ config('application.name', 'Masonite') }}
+{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-1 gap-6 mt-6 md:grid-cols-2 lg:grid-cols-4">
+    <!-- Users chart card --><a href="#" class="p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-lg">
+        <div class="flex items-start">
+            <div class="flex flex-col flex-shrink-0 space-y-2">
+                <span class="text-gray-400">Total Users</span>
+                <span class="text-lg font-semibold">100,221</span>
+            </div>
+            <div class="relative min-w-0 ml-auto h-14">
+                <div class="chartjs-size-monitor">
+                    <div class="chartjs-size-monitor-expand">
+                        <div class=""></div>
+                    </div>
+                    <div class="chartjs-size-monitor-shrink">
+                        <div class=""></div>
+                    </div>
+                </div>
+                <canvas id="usersChart" style="display: block; width: 47px; height: 56px;" width="47" height="56"
+                    class="chartjs-render-monitor"></canvas>
+            </div>
+        </div>
+        <div>
+            <span class="inline-block px-2 text-sm text-white bg-green-300 rounded">14%</span>
+            <span>from 2020</span>
+        </div>
+    </a>
+
+    <!-- Sessions chart card --><a href="#" class="p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-lg">
+        <div class="flex items-start">
+            <div class="flex flex-col flex-shrink-0 space-y-2">
+                <span class="text-gray-400">Sessions</span>
+                <span class="text-lg font-semibold">40%</span>
+            </div>
+            <div class="relative min-w-0 ml-auto h-14">
+                <div class="chartjs-size-monitor">
+                    <div class="chartjs-size-monitor-expand">
+                        <div class=""></div>
+                    </div>
+                    <div class="chartjs-size-monitor-shrink">
+                        <div class=""></div>
+                    </div>
+                </div>
+                <canvas id="sessionsChart" width="66" height="56" style="display: block; width: 66px; height: 56px;"
+                    class="chartjs-render-monitor"></canvas>
+            </div>
+        </div>
+        <div>
+            <span class="inline-block px-2 text-sm text-white bg-green-300 rounded">1.2%</span>
+            <span>from 2020</span>
+        </div>
+    </a>
+
+    <!-- Vists chart card --><a href="#" class="p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-lg">
+        <div class="flex items-start">
+            <div class="flex flex-col flex-shrink-0 space-y-2">
+                <span class="text-gray-400">Vists</span>
+                <span class="text-lg font-semibold">300,527</span>
+            </div>
+            <div class="relative min-w-0 ml-auto h-14">
+                <div class="chartjs-size-monitor">
+                    <div class="chartjs-size-monitor-expand">
+                        <div class=""></div>
+                    </div>
+                    <div class="chartjs-size-monitor-shrink">
+                        <div class=""></div>
+                    </div>
+                </div>
+                <canvas id="vistsChart" width="62" height="56" style="display: block; width: 62px; height: 56px;"
+                    class="chartjs-render-monitor"></canvas>
+            </div>
+        </div>
+        <div>
+            <span class="inline-block px-2 text-sm text-white bg-green-300 rounded">10%</span>
+            <span>from 2020</span>
+        </div>
+    </a>
+
+    <!-- Articles chart card --><a href="#" class="p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-lg">
+        <div class="flex items-start">
+            <div class="flex flex-col flex-shrink-0 space-y-2">
+                <span class="text-gray-400">Articles</span>
+                <span class="text-lg font-semibold">600,429</span>
+            </div>
+            <div class="relative min-w-0 ml-auto h-14">
+                <div class="chartjs-size-monitor">
+                    <div class="chartjs-size-monitor-expand">
+                        <div class=""></div>
+                    </div>
+                    <div class="chartjs-size-monitor-shrink">
+                        <div class=""></div>
+                    </div>
+                </div>
+                <canvas id="articlesChart" width="62" height="56" style="display: block; width: 62px; height: 56px;"
+                    class="chartjs-render-monitor"></canvas>
+            </div>
+        </div>
+        <div>
+            <span class="inline-block px-2 text-sm text-white bg-green-300 rounded">30%</span>
+            <span>from 2020</span>
+        </div>
+    </a>
+</div>
+<div class="divider"></div>
+
+<div class="mx-auto prose">
+    <h4>MARLEY’S GHOST.</h4>
+    <p> <span>Marley</span> was dead: to begin with. There is no doubt whatever about that. The register of his
+        burial
+        was signed by the clergyman, the clerk, the undertaker, and the chief mourner. Scrooge signed it: and
+        Scrooge’s
+        name was good upon ’Change, for anything he chose to put his hand to. Old Marley was as dead as a door-nail.
+    </p>
+    <p> Mind! I don’t mean to say that I know, of my own knowledge, what there is particularly dead about a
+        door-nail.
+        I might have been inclined, myself, to regard a coffin-nail as the deadest piece of ironmongery in the
+        trade.
+        But the wisdom of our ancestors is in the simile; and my unhallowed hands shall not disturb it, or the
+        Country’s
+        done for. You will therefore permit me to repeat, emphatically, that Marley was as dead as a door-nail. </p>
+    <p> Scrooge knew he was dead? Of course he did. How could it be otherwise? Scrooge and he were partners for I
+        don’t know how many years. Scrooge was his sole executor, his sole administrator, his sole assign, his sole
+        residuary legatee, his sole friend, and sole mourner. And even Scrooge was not so dreadfully cut up by the
+        sad
+        event, but that he was an excellent man of business on the very day of the funeral, and solemnised it with
+        an
+        undoubted bargain. </p>
+    <p> This might have lasted half a minute, or a minute, but it seemed an hour. The bells ceased as they had
+        begun,
+        together. They were succeeded by a clanking noise, deep down below; as if some person were dragging a heavy
+        chain over the casks in the wine-merchant’s cellar. Scrooge then remembered to have heard that ghosts in
+        haunted
+        houses were described as dragging chains. </p>
+    <p>The cellar-door flew open with a booming sound, and then he heard the noise much louder, on the floors below;
+        then coming up the stairs; then coming straight towards his door.</p>
+    <p>“It’s humbug still!” said Scrooge. “I won’t believe it.”</p>
+    <p> His colour changed though, when, without a pause, it came on through the heavy door, and passed into the
+        room
+        before his eyes. Upon its coming in, the dying flame leaped up, as though it cried, “I know him; Marley’s
+        Ghost!” and fell again. </p>
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% macro nav_link(link_name,route_name="welcome", link_icon="") -%}
+<a href="{{ route(route_name) }}"
+    class="flex items-center p-2 space-x-2 {% if request().path.endswith(link_name) or request().path == route(route_name) %} text-white border-r-4 border-blue-700 bg-gradient-to-r from-blue-200 to-blue-400{% else %}text-gray-400 hover:bg-gray-100{% endif %}"
+    :class="{'justify-center': !$store.sidebar.open}" @click="$store.sidebar.toggle()">
+    <span>
+        {{ link_icon|safe }}
+    </span>
+    <span :class="{ 'lg:hidden': !$store.sidebar.open }" class="capitalize">{{ link_name }}</span>
+</a>
+{% endmacro %}

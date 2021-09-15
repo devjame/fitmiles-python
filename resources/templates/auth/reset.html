@@ -1,0 +1,30 @@
+{% extends 'auth/base.html' %}
+{% from 'components/alerts.html' import alert_error %}
+
+{% block content %}
+<div class="px-6 py-4">
+    <h3 class="mt-1 text-xl font-medium text-center text-gray-600 dark:text-gray-200">Reset Password</h3>
+    {% if bag().any() %}
+    {% for error in bag().get_errors() %}
+    <div class="flex items-center justify-center w-12 bg-red-500">
+        {{ alert_error(error) }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <form action="/password/{{token}}/reset" method="POST">
+        {{ csrf_field }}
+        <div class="form-control mt-4">
+            <label for="password" class="label"><span class="label-text">New Password</span></label>
+            <input type="password"
+                class="input input-bordered dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:border-blue-500"
+                name="password" placeholder="New Password" aria-label="New Password">
+        </div>
+
+        <div class="flex items-center justify-between mt-4">
+            <button class="btn btn-primary" type="submit">
+                Reset
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
