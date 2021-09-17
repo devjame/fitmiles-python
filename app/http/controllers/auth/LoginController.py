@@ -48,7 +48,7 @@ class LoginController:
             return request.back().with_errors(errors).with_input()
 
         if auth.login(request.input("email"), request.input("password")):
-            return request.redirect("/home")
+            return request.redirect("/")
 
         return request.back().with_errors({"email": ["Email or password is incorrect"]})
 
