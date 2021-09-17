@@ -10,7 +10,7 @@ class CreateInstructorsTable(Migration):
         """
         with self.schema.create("instructors") as table:
             table.increments("instructor_id")
-            table.string("instructor_name", 11),
+            table.string("instructor_name", 30),
             table.string("address", 100),
             table.string("email", 30),
             table.integer("user_id").unsigned()
@@ -24,4 +24,4 @@ class CreateInstructorsTable(Migration):
         """
         Revert the migrations.
         """
-        self.schema.drop("instrutors")
+        self.schema.drop("instructors")
