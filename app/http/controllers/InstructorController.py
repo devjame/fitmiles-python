@@ -1,10 +1,14 @@
 """ A InstructorController Module """
 
+import json
+
 from masonite.controllers import Controller
 from masonite.request import Request
+from masonite.response import Response
 from masonite.validation import Validator
 from masonite.view import View
 from app.Instructor import Instructor
+from masoniteorm.exceptions import QueryException
 
 
 class InstructorController(Controller):
@@ -36,32 +40,43 @@ class InstructorController(Controller):
 
         return view.render("instructor/create")
 
-    def store(self, request: Request, validate: Validator):
+    def store(
+        self, request: Request, validate: Validator, view: View, response: Response
+    ):
         """Create a new resource listing
         ex. Post target to create new Model
             Post().route("/store", InstructorController)
         """
 
-        errors = request.validate(
-            validate.required(["name", "address", "email"]),
-            validate.email("email"),
-        )
-
-        if errors:
-            return (
-                request.redirect_to("instructor.create")
-                .with_errors(errors)
-                .with_input()
+        try:
+            errors = request.validate(
+                validate.required(["name", "address", "email"]),
+                validate.email("email"),
             )
 
-        instructor = Instructor.create(
-            instructor_name=request.input("name"),
-            address=request.input("address"),
-            email=request.input("email"),
-            user_id=request.user().user_id,
-        ).fresh()
+            if errors:
+                return (
+                    request.redirect_to("instructor.create")
+                    .with_errors(errors)
+                    .with_input()
+                )
 
-        return request.redirect_to("instructor.home")
+            instructor = Instructor.create(
+                instructor_name=request.input("name"),
+                address=request.input("address"),
+                email=request.input("email"),
+                user_id=request.user().user_id,
+            ).fresh()
+
+        except QueryException as e:
+            error = json.dumps({"error": [str(e)]})
+            return (
+                request.redirect_to("instructor.create").with_errors(error).with_input()
+            )
+
+        return request.redirect_to(
+            "instructor.show", {"instructor": instructor.instructor_id}
+        )
 
     def edit(self, view: View, request: Request):
         """Show form to edit an existing resource listing
