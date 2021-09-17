@@ -24,7 +24,7 @@ class LoginController:
             masonite.view.View -- Returns the Masonite view class.
         """
         if request.user():
-            return request.redirect("/home")
+            return request.redirect("/")
 
         return view.render("auth/login")
 
