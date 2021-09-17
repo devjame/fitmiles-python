@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% import 'components/user_list.html' as list %}
+{% import 'components/user_list.html' as list with context%}
 
 
 {% block css %}
@@ -12,8 +12,8 @@ Instructor Home Page
 {% endblock %}
 
 {% block content %}
-<div class="flex w-full" x-data="{ open: false }">
-    <div class="max-w-md">
+<div class="flex w-full">
+    <div class="max-w-md max-h-full overflow-hidden overflow-y-scroll mb-14 pr-4">
         <div class="px-4 py-5 sm:px-6 w-full border dark:bg-gray-800 bg-white shadow mb-2 rounded-md relative">
             <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">
                 Instructors Lists
@@ -22,17 +22,19 @@ Instructor Home Page
                 Details and informations about Instructors.
             </p>
             <a href="{{ route('instructor.create') }}" class="btn btn-info btn-xs absolute top-2 right-1"
-                data-turbo-frame="create_instructor">New</a>
+                data-turbo-frame="instructor">New</a>
         </div>
-        <ul class=" flex flex-col overflow-y-auto">
-            {% for instructor in instructors %}
-            <li class="border-gray-400 flex flex-row mb-2">
-                {{ list.user_list(instructor) }}
-            </li>
-            {% endfor %}
-        </ul>
+        <div class="h-full overflow-y-hidden mb-4">
+            <ul class="flex flex-col" id="instructors_list max-h-full my-5">
+                {% for instructor in instructors %}
+                <li class="border-gray-400 flex flex-row mb-2 flex-1">
+                    {{ list.user_list(instructor) }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
-    <turbo-frame id="create_instructor" class="flex-1">
+    <turbo-frame id="instructor" class="flex-1">
         <div class="flex-1">
             <div class="bg-white dark:bg-gray-800 ">
                 <div class="text-center w-full mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20">
