@@ -10,7 +10,7 @@ ROUTES = [
             Get("/", "InstructorController@index").name("instructor.home"),
             # create
             Get("/create", "InstructorController@create").name("instructor.create"),
-            Post("", "InstructorController@store").name("instructor.store"),
+            Post("/", "InstructorController@store").name("instructor.store"),
             # show single
             Get("/@id", "InstructorController@show").name("instructor.show"),
             # Update
