@@ -1,0 +1,9 @@
+{% import 'components/user_list.html' as list with context%}
+
+<turbo-stream action="append" target="instructors_list">
+    <template>
+        <li class="border-gray-400 flex flex-row mb-2">
+            {{ list.user_list(instructor) }}
+        </li>
+    </template>
+</turbo-stream>
